@@ -159,7 +159,7 @@ if ($_POST['Install']) {
 	echo "Admin Account successfully created!<br /><br />";
 	
 	echo "Done! Go to <a href='index.php'>your Blog</a>!<br /><br />";
-	echo "<b>DO NOT FORGET, TO DELETE \"install.php\", AS SOON AS POSSIBLE!</b>";
+	echo "<b>DO NOT FORGET, TO DELETE \"install/index.php\", AS SOON AS POSSIBLE!</b>";
 }
 else {
 	// Check if the File exists.
@@ -176,7 +176,7 @@ else {
 			echo "Warning: The Assets Folder is not writeable.<br />You can still Install, but you won't be able to the the Uploader, until you fix that.";
 		}
 ?>
-<form action='install.php' method='post'>
+<form action='index.php' method='post'>
 <h1>Database</h1>
 Hostname: <input type='text' name='hostname' /><br />
 Username: <input type='text' name='username' /><br />
