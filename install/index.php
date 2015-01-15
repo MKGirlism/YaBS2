@@ -68,6 +68,23 @@ if ($_POST['Install']) {
 	
 	echo "Table 'Comments' successfully inserted.<br />";
 	
+	$mysqli->query("CREATE TABLE IF NOT EXISTS `General` (
+  `Name` varchar(255) NOT NULL,
+  `Decro` varchar(255) NOT NULL,
+  `Tags` varchar(255) NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0;");
+	
+	echo "Table 'General' successfully created.<br />";
+	
+	$sitename = $_POST['sitename'];
+	$sitedecro = $_POST['sitedecro'];
+	$sitetags = $_POST['sitetags'];
+	
+	$mysqli->query("INSERT INTO `General` (`Name`, `Decro`, `Tags`) VALUES
+('$sitename', '$sitedecro', '$sitetags');");
+	
+	echo "Table 'General' successfully inserted.<br />";
+	
 	$mysqli->query("CREATE TABLE IF NOT EXISTS `Images` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
@@ -185,7 +202,11 @@ Database Name: <input type='text' name='dbname' />
 <h1>Admin Account</h1>
 Username: <input type='text' name='uname' /><br />
 Password: <input type='password' name='passwd' /><br />
-Email: <input type='text' name='email' /><br />
+Email: <input type='text' name='email' />
+<h1>Site Information</h1>
+Website Name: <input type='text' name='sitename' /><br />
+Description: <input type='text' name='sitedecro' /><br />
+Tags: <input type='text' name='sitetags' /><br />
 <input name='Install' type='submit' value='Install' />
 </form>
 <?php
