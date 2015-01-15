@@ -1,5 +1,4 @@
 <?php
-require("config.php");
 $admin = htmlentities($_SESSION['uname']['group'], ENT_QUOTES, 'UTF-8') == 1;
 
 //MySQL

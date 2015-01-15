@@ -1,6 +1,4 @@
 <?php
-	require("config.php");
-	
 	// MySQL
 	$mysqli = new mysqli($hosty, $uname, $paswd, $dbnme);
 	

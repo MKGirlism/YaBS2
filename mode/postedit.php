@@ -11,8 +11,6 @@ ob_end_clean();
 ?>
 <h1>Edit</h1>
 <?php
-require("config.php");
-
 // MySQL
 $mysqli = new mysqli($hosty, $uname, $paswd, $dbnme);
 

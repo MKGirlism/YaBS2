@@ -1,7 +1,4 @@
 <?php
-include("config.php");
-
-//ob_start();
 // MySQL
 $mysqli = new mysqli($hosty, $uname, $paswd, $dbnme);
 
@@ -32,7 +29,6 @@ else {
        		$result = $mysqli->query($update);
 		
        		if ($result) {
-       		//	$result->close();
        			$mysqli->close();
        		}
 		echo "<h2>Edit Comment</h2>";

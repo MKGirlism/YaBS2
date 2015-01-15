@@ -78,19 +78,22 @@
 	<?php include("module/register.php"); ?>
 </head>
 <body>
-<?php
-include("module/head.php");
-include("module/menu.php");
-?>
-<h1>Register</h1>
-<form action="register.php" method="post">
-	Username: <input type="text" name="uname" value="" /><br />
-	Email: <input type="text" name="email" value="" /><br />
-	Password: <input type="password" name="passwd" value="" /><br />
-	<input type="submit" value="Register" />
-</form>
-<?php
-include("module/foot.php");
-?>
+<div id='Container'>
+	<div id='Logo'> <?php include("module/head.php"); ?> </div>
+	<div id='Links'> <?php include("module/topbar.php"); ?> </div>
+	<div id='User'> <?php include("module/menu.php"); ?> </div>
+	
+	<div id='Main'>
+	<h1>Register</h1>
+	<form action="register.php" method="post">
+		Username: <input type="text" name="uname" value="" /><br />
+		Email: <input type="text" name="email" value="" /><br />
+		Password: <input type="password" name="passwd" value="" /><br />
+		<input type="submit" value="Register" />
+	</form>
+	</div>
+	
+	<?php include("module/foot.php"); ?>
+</div>
 </body>
 </html>

@@ -17,8 +17,6 @@ include("module/postfunctions.php");
 
 // Execute, as soon as the Posting starts.
 if ($_POST['submit']) {
-        require("config.php");
-        
         // MySQL
 	$con = mysqli_connect($hosty, $uname, $paswd, $dbnme);
         

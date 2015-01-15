@@ -11,8 +11,6 @@ ob_end_clean();
 ?>
 <h1>Delete</h1>
 <?php
-require("config.php");
-
 // Initialise MySQL Connection.
 $mysqli = new mysqli($hosty, $uname, $paswd, $dbnme);
 

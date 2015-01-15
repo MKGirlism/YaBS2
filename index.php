@@ -1,4 +1,5 @@
 <?php
+include("config.php");
 header("Content-Type: text/html; charset=utf-8");
 session_start();
 ?>
@@ -8,19 +9,27 @@ session_start();
 	<?php include("module/meta.php"); ?>
 </head>
 <body>
-<?php
-$curPage = $_GET['mode'];
-include("module/head.php");
-include("module/menu.php");
 
-if (empty($curPage)) {
-	include("mode/index.php");
-}
-else {
-	include("mode/".$curPage.".php");
-}
+<div id='Container'>
+<?php $curPage = $_GET['mode']; ?>
+	<div id='Logo'> <?php include("module/head.php"); ?> </div>
+	<div id='Links'> <?php include("module/topbar.php"); ?> </div>
+	
+	<div id='User'> <?php include("module/menu.php"); ?> </div>
+	
+	<div id='Main'>
+	<?php
+		if (empty($curPage)) {
+			include("mode/index.php");
+		}
+		else {
+			include("mode/".$curPage.".php");
+		}
+	?>
+	</div>
 
-include("module/foot.php");
-?>
+	<?php include("module/foot.php"); ?>
+</div>
+
 </body>
 </html>

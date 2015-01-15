@@ -1,5 +1,5 @@
 <?php
-require("config.php");
+//require("config.php");
 $admin = htmlentities($_SESSION['uname']['group'], ENT_QUOTES, 'UTF-8') == 1;
 
 // MySQL
@@ -10,22 +10,6 @@ $i = $_SESSION['uname']['uid'];
 // Load Data
 $sql = "SELECT * FROM Pages ORDER BY Title ASC";
 $link = "SELECT * FROM Links ORDER BY Title ASC";
-$joke = "SELECT * FROM Jokes ORDER BY rand() LIMIT 1";
-
-$joker = $mysqli->prepare($joke);
-$joker->execute();
-
-$joker->bind_result($jid, $jtext);
-
-// Random Jokes.
-echo "<div id='Links'>";
-echo "<b>Random Joke: </b> ";
-while ($joker->fetch()) {
-	echo $jtext;
-}
-echo "</div>";
-
-$joker->close();
 
 $stmt = $mysqli->prepare($sql);
 $stmt->execute();
@@ -33,7 +17,6 @@ $stmt->execute();
 $stmt->bind_result($id, $title, $body, $priv);
 
 //Start Menu.
-echo "<div id='User'>";
 echo "<table id='Nav' class='outline margin' style='width:135px;'><tr class='NavHead1'><th>User</th></tr>";
 echo "<tr class='NavCell0'><td>";
 
@@ -50,6 +33,7 @@ echo "</li>";
 // Show if Logged In.
 if (!empty($_SESSION['uname'])) {
 	echo "<li><a href='?mode=uploader'>Uploader</a></li>";
+	if ($admin) echo "<li><a href='?mode=meta'>Edit Site Information</a>";
 	echo "<li><a href='logout.php'>Logout</a></li>";
 }
 
@@ -97,7 +81,4 @@ $stmt2->close();
 $mysqli->close();
 
 echo "</ul></td></tr></table>";
-echo "</div>";
-
-echo "<div id=Main>";
 ?>
