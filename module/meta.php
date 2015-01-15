@@ -2,7 +2,7 @@
 	error_reporting(0);
 	$mysqli = new mysqli($hosty, $uname, $paswd, $dbnme);
 	
-	$sql = "SELECT * FROM General";
+	$sql = "SELECT Name, Decro, Tags FROM General";
 	$stmt = $mysqli->prepare($sql);
 	$stmt->execute();
 	

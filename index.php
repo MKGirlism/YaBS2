@@ -11,7 +11,7 @@ session_start();
 <body>
 
 <div id='Container'>
-<?php $curPage = $_GET['mode']; ?>
+	<?php $curPage = $_GET['mode']; ?>
 	<div id='Logo'> <?php include("module/head.php"); ?> </div>
 	<div id='Links'> <?php include("module/topbar.php"); ?> </div>
 	

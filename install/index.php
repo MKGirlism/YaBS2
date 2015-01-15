@@ -71,7 +71,8 @@ if ($_POST['Install']) {
 	$mysqli->query("CREATE TABLE IF NOT EXISTS `General` (
   `Name` varchar(255) NOT NULL,
   `Decro` varchar(255) NOT NULL,
-  `Tags` varchar(255) NOT NULL
+  `Tags` varchar(255) NOT NULL,
+  `Topbar` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0;");
 	
 	echo "Table 'General' successfully created.<br />";
@@ -80,8 +81,8 @@ if ($_POST['Install']) {
 	$sitedecro = $_POST['sitedecro'];
 	$sitetags = $_POST['sitetags'];
 	
-	$mysqli->query("INSERT INTO `General` (`Name`, `Decro`, `Tags`) VALUES
-('$sitename', '$sitedecro', '$sitetags');");
+	$mysqli->query("INSERT INTO `General` (`Name`, `Decro`, `Tags`, `Topbar`) VALUES
+('$sitename', '$sitedecro', '$sitetags', 1);");
 	
 	echo "Table 'General' successfully inserted.<br />";
 	
@@ -144,6 +145,8 @@ if ($_POST['Install']) {
   `email` varchar(100) NOT NULL,
   `group` int(1) NOT NULL DEFAULT '0',
   `ava` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'assets/avatars/haznoavaz.png',
+  `ontime` int(10) NOT NULL DEFAULT '0',
+  `online` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`uid`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0;");
 	
