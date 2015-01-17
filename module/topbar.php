@@ -26,7 +26,6 @@
 	
 	$joke = "SELECT Text FROM Jokes ORDER BY rand() LIMIT 1";
 	$uonline = "SELECT uid, uname, ava, ontime, online FROM Users WHERE uname = '$member' AND ontime > $timeout";
-	$search = "SELECT ";
 	
 	// Random Jokes.
 	$joker = $mysqli->prepare($joke);
@@ -84,7 +83,18 @@
 	mysqli_close();
 	
 	// Search.
-	
+	if ($topbar == 3) {
+		?>
+		<form action = "?mode=search" method = "post">
+		Search for <input name = "query" value = "" />
+		in <select name = "app">
+		<option value = "Pages">Pages</option>
+		<option value = "Blog">Blog</option>
+		</select>
+		<input type = "submit" value = "Search" />
+		</form>
+		<?php
+	}
 	
 	//$mysqli->close();
 ?>

@@ -17,8 +17,9 @@ if ($_POST['Submit']) {
 	$sname = $mysqli->real_escape_string($_POST['Name']);
 	$sdec = $mysqli->real_escape_string($_POST['Decro']);
 	$stags = $mysqli->real_escape_string($_POST['Tags']);
+	$top = $_POST['Topbar'];
 	
-	$update = "UPDATE General SET Name='$sname', Decro='$sdec', Tags='$stags'";
+	$update = "UPDATE General SET Name='$sname', Decro='$sdec', Tags='$stags', Topbar='$top'";
 	$result = $mysqli->query($update);
 	
 	if ($result) {
@@ -46,8 +47,15 @@ else {
 		echo "Site Name: <input type='text' name='Name' value='".$sname."'><br />";
 		echo "Description: <input type='text' name='Decro' value='".$sdec."'><br />";
 		echo "Tags: <input type='text' name='Tags' value='".$stags."'><br />";
+		echo "Topbar:<br />
+		<select name='Topbar'>
+			<option value='0'>Off</option>
+			<option value='1'>Random Jokes</option>
+			<option value='2'>Users Online</option>
+			<option value='3'>Search</option>
+		</select><br />";
 		echo "<input name='Submit' type='submit' value='Edit'>
-</form><br /><br />";
+		</form><br /><br />";
 	}
 	
 	$stmt->close();
