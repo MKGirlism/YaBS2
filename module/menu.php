@@ -33,7 +33,10 @@ echo "</li>";
 // Show if Logged In.
 if (!empty($_SESSION['uname'])) {
 	echo "<li><a href='?mode=uploader'>Uploader</a></li>";
-	if ($admin) echo "<li><a href='?mode=meta'>Edit Site Information</a>";
+	if ($admin) {
+		echo "<li><a href='?mode=meta'>Edit Site Information</a>";
+		echo "<li><a href='?mode=memlst'>User List</a>";
+	}
 	echo "<li><a href='logout.php'>Logout</a></li>";
 }
 
