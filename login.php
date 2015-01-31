@@ -56,7 +56,6 @@
 <html>
 <head>
         <?php include("module/meta.php"); ?>
-	<?php include("module/login.php"); ?>
 </head>
 <body>
 <div id='Container'>
