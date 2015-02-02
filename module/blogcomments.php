@@ -52,17 +52,8 @@ Add Reply<br />
 <br />
 <script type="text/javascript" src="module/codebutton.js"></script>
 <b>Message</b><br />
-<input type="button" value="Bold" onclick="bbButton ('b');" />
-<input type="button" value="Italics" onclick="bbButton ('i');" />
-<input type="button" value="Underline" onclick="bbButton ('u');" />
-<input type="button" value="Stripe" onclick="bbButton ('s');" />
-<input type="button" value="Overline" onclick="bbButton ('o');" />
-<input type="button" value="Image" onclick="bbButton ('img');" />
-<input type="button" value="YouTube" onclick="bbButton ('yt');" />
-<input type="button" value="Link" onclick="bbButton2 ('link');" />
-<input type="button" value="Sound" onclick="bbButton ('sound');" />
-<input type="button" value="Size" onclick="bbButton2 ('size');" />
-<input type="button" value="Colour" onclick="bbButton2 ('colour');" />
+<?php include ("module/textbuttons.php"); ?>
+
 <textarea name="message" id="message" cols="166" rows="10"></textarea><br />
 <input type="submit" name="submit" id="submit" value="Comment" />
 </form>

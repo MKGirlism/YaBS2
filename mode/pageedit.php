@@ -49,19 +49,8 @@ else {
 		echo "<form action='?mode=pageedit&id=$aid' method='post'>
 <div id='BlogTitle'><input type='text' name='Name' value='".$title."'></div><br />
 <div id='BlogBody'>";
-?>
-<input type="button" value="Bold" onclick="bbButton ('b');" />
-<input type="button" value="Italics" onclick="bbButton ('i');" />
-<input type="button" value="Underline" onclick="bbButton ('u');" />
-<input type="button" value="Stripe" onclick="bbButton ('s');" />
-<input type="button" value="Overline" onclick="bbButton ('o');" />
-<input type="button" value="Image" onclick="bbButton ('img');" />
-<input type="button" value="YouTube" onclick="bbButton ('yt');" />
-<input type="button" value="Link" onclick="bbButton2 ('link');" />
-<input type="button" value="Sound" onclick="bbButton ('sound');" />
-<input type="button" value="Size" onclick="bbButton2 ('size');" />
-<input type="button" value="Colour" onclick="bbButton2 ('colour');" />
-<?php
+include ("module/textbuttons.php");
+
 echo "<textarea name='Content' id='message' rows='40' cols='160' wrap='hard'>".$body."</textarea><br />
 <select name='Privacy'>
   <option value='0'>Public</option>

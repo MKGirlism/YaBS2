@@ -48,19 +48,8 @@ else {
 			echo "<a href='index.php'>Return</a><br /><br />";
 			echo "<form action='?mode=commentedit&id=$aid' method='post'>
 <div id='BlogBody'>";
-?>
-<input type="button" value="Bold" onclick="bbButton ('b');" />
-<input type="button" value="Italics" onclick="bbButton ('i');" />
-<input type="button" value="Underline" onclick="bbButton ('u');" />
-<input type="button" value="Stripe" onclick="bbButton ('s');" />
-<input type="button" value="Overline" onclick="bbButton ('o');" />
-<input type="button" value="Image" onclick="bbButton ('img');" />
-<input type="button" value="YouTube" onclick="bbButton ('yt');" />
-<input type="button" value="Link" onclick="bbButton2 ('link');" />
-<input type="button" value="Sound" onclick="bbButton ('sound');" />
-<input type="button" value="Size" onclick="bbButton2 ('size');" />
-<input type="button" value="Colour" onclick="bbButton2 ('colour');" />
-<?php
+include ("module/textbuttons.php");
+
 echo "<textarea name='Content' id='message' rows='20' cols='160' wrap='hard'>".$msg."</textarea><br />
 <input name='Submit' type='submit' value='Edit'></div>
 </form><br /><br />";
