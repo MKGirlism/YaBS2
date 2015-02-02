@@ -14,7 +14,7 @@ error_reporting(0);
 // Show if Submitted.
 if ($_POST['Install']) {
 	// Edit the Config File.
-	$configFile = fopen("config.php", "w") or die("Unable to Open File!");
+	$configFile = fopen("../config.php", "w") or die("Unable to Open File!");
 	$config = "<?php
 \$hosty = \"".$_POST['hostname']."\";
 \$uname = \"".$_POST['username']."\";
@@ -26,7 +26,7 @@ if ($_POST['Install']) {
 	
 	echo "Config File successfully made.<br /><br />";
 	
-	include("config.php");
+	include("../config.php");
 	
 	$mysqli = new mysqli($hosty, $uname, $paswd, $dbnme);
 	
@@ -155,7 +155,7 @@ if ($_POST['Install']) {
 	echo "Database stuff completed successfully!<br /><br />";
 	
 	// Create the Admin Account.
-	require("common.php");
+	require("../common.php");
 	$query = "INSERT INTO Users (`uname`, `passwd`, `salt`, `email`, `group`)
 	VALUES (:uname, :passwd, :salt, :email, :group)";
 	
@@ -183,11 +183,11 @@ if ($_POST['Install']) {
 }
 else {
 	// Check if the File exists.
-	if (!file_exists("config.php")) {
+	if (!file_exists("../config.php")) {
 		echo "I can't find the File \"config.php\" not found.<br />Please create it.";
 	}
 	// Check if File is overwriteable.
-	else if (decoct(fileperms("config.php")) != 100777) {
+	else if (decoct(fileperms("../config.php")) != 100777) {
 		echo "The File \"config.php\" is not writeable.<br />CHMod it to 777, please!";
 	}
 	// The Form.
