@@ -69,7 +69,7 @@
 				if ($static > $past) mysqli_query($con, "UPDATE Users SET online = 0 WHERE uname = '$member'");
 				
 				while ($row = mysqli_fetch_assoc($prep)) {
-					echo "<a href='profile.php?uid=".$row['uid']."'><img src='".$row['ava']."' width='20px' /> ".$row['uname']."</a>";
+					echo "<a href='?mode=profile&uid=".$row['uid']."'><img src='".$row['ava']."' width='20px' /> ".$row['uname']."</a>";
 					echo " ";
 				}
 			}
