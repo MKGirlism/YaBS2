@@ -37,7 +37,7 @@ else {
 	$stmt = $mysqli->prepare($sql);
 	$stmt->execute();
 	
-	$stmt->bind_result($sname, $sdec, $stags);
+	$stmt->bind_result($sname, $sdec, $stags, $top);
 	
 	while ($stmt->fetch()) {
 		echo "<script type='text/javascript' src='module/codebutton.js'></script>";
@@ -48,12 +48,14 @@ else {
 		echo "Description: <input type='text' name='Decro' value='".$sdec."'><br />";
 		echo "Tags: <input type='text' name='Tags' value='".$stags."'><br />";
 		echo "Topbar:<br />
-		<select name='Topbar'>
-			<option value='0'>Off</option>
-			<option value='1'>Random Jokes</option>
-			<option value='2'>Users Online</option>
-			<option value='3'>Search</option>
-		</select><br />";
+		<select name='Topbar'>";
+?>
+			<option value='0' <?php if ($top == 0) echo "selected='selected'"; ?>>Off</option>
+			<option value='1' <?php if ($top == 1) echo "selected='selected'"; ?>>Random Jokes</option>
+			<option value='2' <?php if ($top == 2) echo "selected='selected'"; ?>>Users Online</option>
+			<option value='3' <?php if ($top == 3) echo "selected='selected'"; ?>>Search</option>
+<?php
+		echo "</select><br />";
 		echo "<input name='Submit' type='submit' value='Edit'>
 		</form><br /><br />";
 	}
