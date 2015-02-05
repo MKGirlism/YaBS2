@@ -73,6 +73,7 @@ a:link, a:visited, a:hover, a:active {
 }
 
 ul.stackedmenu {
+	width: 130px;
 	text-align:left;
 	font-size: .85em;
 	list-style-type: disc;

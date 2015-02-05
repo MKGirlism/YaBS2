@@ -17,7 +17,7 @@ $stmt->execute();
 $stmt->bind_result($id, $title, $body, $priv);
 
 //Start Menu.
-echo "<table id='Nav' class='outline margin' style='width:135px;'><tr class='NavHead1'><th>User</th></tr>";
+echo "<table id='Nav' class='outline margin'><tr class='NavHead1'><th>User</th></tr>";
 echo "<tr class='NavCell0'><td>";
 
 echo "<ul id='userpanel' class='stackedmenu'><li>";
