@@ -1,4 +1,4 @@
-YaBS 2 Alpha
+YaBS 2.0 Beta
 =====
 
 The first pure Blogging System, ever seen, since ages.<br />
