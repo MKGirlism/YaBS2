@@ -13,7 +13,6 @@
 		<meta name=keywords content='$stags'>
 		<meta name=generator content='YaBS'>
 		<link rel=stylesheet href='theme/$stheme/style.css' type='text/css' media=screen id=stylesheet />
-		<script type='text/javascript' src='theme/$stheme/sticky.js'></script>
 		<title>$sname</title>";
 	}
 	

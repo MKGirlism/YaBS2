@@ -51,7 +51,7 @@
 	
 	echo "<table border='0' cellpadding='2' width='100%'>";
 	while ($stmt->fetch()) {
-		echo "<td><a href='$url'><img src='$url' alt='$user\'s Submission' height=100 /></a><br />By <a href='?mode=profile&uid=$uidU'>$user</a></td>";
+		echo "<td><a href='$url'><img src='$url' alt='$user\'s Submission' width=100 height=100 /></a><br />By <a href='?mode=profile&uid=$uidU'>$user</a></td>";
 	}
 	echo "</table>";
 	
