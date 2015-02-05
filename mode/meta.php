@@ -37,7 +37,7 @@ else {
 	$stmt = $mysqli->prepare($sql);
 	$stmt->execute();
 	
-	$stmt->bind_result($sname, $sdec, $stags, $top);
+	$stmt->bind_result($sname, $sdec, $stags, $top, $stheme);
 	
 	while ($stmt->fetch()) {
 		echo "<script type='text/javascript' src='module/codebutton.js'></script>";
@@ -55,6 +55,16 @@ else {
 			<option value='2' <?php if ($top == 2) echo "selected='selected'"; ?>>Users Online</option>
 			<option value='3' <?php if ($top == 3) echo "selected='selected'"; ?>>Search</option>
 <?php
+		echo "</select><br />";
+		echo "Theme:<br />
+		<select name='Theme'>";
+			$themes = array_map("htmlspecialchars", scandir("theme"));
+			$themes = array_diff($themes, array('..', '.', 'common'));
+			foreach ($themes as $theme) {
+				echo "<option value='$theme'";
+				if ($stheme == $theme) echo "selected='selected'";
+				echo ">$theme</option>";
+			}
 		echo "</select><br />";
 		echo "<input name='Submit' type='submit' value='Edit'>
 		</form><br /><br />";

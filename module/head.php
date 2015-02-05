@@ -1,1 +1,1 @@
-<a href="index.php"><img src="theme/logo.png" /></a>
+<a href="index.php"><img src="theme/common/logo.png" /></a>
