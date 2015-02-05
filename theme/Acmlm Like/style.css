@@ -1,0 +1,190 @@
+/*Main*/
+body {
+	margin: 20px 0px;
+	padding: 0px;
+	text-align: center;
+	font-family: arial;
+	font-size: 14px;
+	color: #FFFFFF;
+	background-color: #FFFFFF;
+	/*background-image: url('starsbg.png');*/
+	background-repeat: repeat;
+}
+
+a:link, a:visited, a:hover, a:active {
+	color: #BBBBBB;
+	text-decoration: none;
+}
+
+/*Container*/
+#Container {
+	max-width:1377px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/*The Purple Stuff*/
+#Logo, #Main {
+        margin: 5px auto;
+        border: 5px outset rgba(145, 145, 145, 1);
+        background-color: rgba(145, 145, 145, 1);
+}
+
+#Logo {
+        width: 100%;
+        text-align: center;
+}
+
+#Main {
+	width: 100%;
+        margin-right:140px;
+        text-align: left;
+}
+
+/*The Pink Stuff*/
+#User, #Links {
+	text-align: center;
+	border: 5px outset rgba(143, 143, 143, 1);
+        background-color: rgba(143, 143, 143, 1);
+}
+
+#User {
+	width: 100%;
+	margin: 5px auto;
+}
+
+#Nav {
+	text-align: center;
+	width: 100%;
+	position: relative;
+	z-index: 1000;
+}
+
+#Nav.NavFixed {
+	position: fixed;
+	top: 6px;
+}
+
+.NavHead1 th {
+	background: #555555;
+}
+
+.NavCell0 {
+	background-color: rgba(143, 143, 143, 1);
+}
+
+ul.stackedmenu {
+	text-align: center;
+	font-size: .85em;
+	list-style-type: disc;
+	margin: 0;
+	padding: 0;
+}
+
+ul.stackedmenu li a {
+	display: inline-block;
+	float: left;
+	padding: 4px;
+	margin: 0;
+}
+
+ul.stackedmenu li {
+	display: block;
+	border: 0 none;
+	padding: 0;
+}
+
+ul.stackedmenu li.sidemenuseparator {
+	margin:5px;
+}
+
+#Links {
+	width: 100%;
+}
+
+#Links a:link, #Links a:link, #Links a:hover, #Links a:active {
+	font-size: 1.5em;
+        font-weight: bold;
+}
+
+/*Footer*/
+#Footer {
+	text-align: center;
+	width: 100%;
+	font-size: .8em;
+	clear: both;
+	position: fixed;
+	bottom: 0;
+}
+
+/*Blog*/
+#BlogBody {
+	width: 97%;
+	margin: 0px auto;
+	text-align: left;
+	padding: 6px;
+	border: 1px outset rgba(123, 123, 123, 1);
+	background-color: rgba(123, 123, 123, 1);
+}
+
+#BlogTitle {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#BlogData {
+	width: 97%;
+	margin: 0px auto;
+	text-align: left;
+	padding: 6px;
+	border: 1px outset rgba(100, 100, 100, 1);
+	background-color: rgba(100, 100, 100, 1);
+}
+
+/*Menu Buttons*/
+.MenuButton, .AddButton {
+        -moz-box-shadow:inset 0px 1px 0px 0px #000000;
+        -webkit-box-shadow:inset 0px 1px 0px 0px #000000;
+        box-shadow:inset 0px 1px 0px 0px #000000;
+        background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #232323), color-stop(1, #121212) );
+        background:-moz-linear-gradient( center top, #232323 5%, #121212 100% );
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#232323', endColorstr='#121212');
+        background-color:#232323;
+        border:1px solid #323232;
+        display:inline-block;
+        color:#777777;
+        font-family:arial;
+        font-size:15px;
+        font-weight:bold;
+        padding:6px 10px;
+        text-shadow:1px 1px 0px #ffffff;
+}
+
+.MenuButton {
+        /*-moz-border-radius:6px;
+        -webkit-border-radius:6px;
+        border-radius:6px;*/
+}
+
+.AddButton {
+        /*-moz-border-radius:6px;
+        -webkit-border-radius:6px;*/
+        border-bottom-left-radius:12px;
+        float: right;
+}
+
+.MenuButton a, .AddButton a {
+        text-decoration:none;
+}
+
+.MenuButton:hover, .AddButton:hover {
+        background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #121212), color-stop(1, #232323) );
+        background:-moz-linear-gradient( center top, #121212 5%, #232323 100% );
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#121212', endColorstr='#232323');
+        background-color:#121212;
+}
+
+.MenuButton:active, .AddButton:active {
+        position:relative;
+        top:1px;
+}
