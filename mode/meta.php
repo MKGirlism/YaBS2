@@ -18,8 +18,9 @@ if ($_POST['Submit']) {
 	$sdec = $mysqli->real_escape_string($_POST['Decro']);
 	$stags = $mysqli->real_escape_string($_POST['Tags']);
 	$top = $_POST['Topbar'];
+	$stheme = $_POST['Theme'];
 	
-	$update = "UPDATE General SET Name='$sname', Decro='$sdec', Tags='$stags', Topbar='$top'";
+	$update = "UPDATE General SET Name='$sname', Decro='$sdec', Tags='$stags', Topbar='$top', Theme='$stheme'";
 	$result = $mysqli->query($update);
 	
 	if ($result) {
