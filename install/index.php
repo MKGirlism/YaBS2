@@ -72,7 +72,8 @@ if ($_POST['Install']) {
   `Name` varchar(255) NOT NULL,
   `Decro` varchar(255) NOT NULL,
   `Tags` varchar(255) NOT NULL,
-  `Topbar` int(1) NOT NULL DEFAULT '1'
+  `Topbar` int(1) NOT NULL DEFAULT '1',
+  `Theme` varchar(200) NOT NULL DEFAULT 'Yamisoft'
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0;");
 	
 	echo "Table 'General' successfully created.<br />";
