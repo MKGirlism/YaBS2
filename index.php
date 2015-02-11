@@ -10,6 +10,20 @@ session_start();
 </head>
 <body>
 
+<?php
+$mysqli = new mysqli($hosty, $uname, $paswd, $dbnme);
+$bloguse = "SELECT BlogPurpose FROM General";
+
+$usage = $mysqli->prepare($bloguse);
+$usage->execute();
+$usage->bind_result($bp);
+
+while ($usage->fetch()) $blogpur = $bp;
+
+$usage->close();
+$mysqli->close();
+?>
+
 <div id='Container'>
 	<?php $curPage = $_GET['mode']; ?>
 	<div id='Logo'> <?php include("module/head.php"); ?> </div>
@@ -20,7 +34,8 @@ session_start();
 	<div id='Main'>
 	<?php
 		if (empty($curPage)) {
-			include("mode/index.php");
+			if ($blogpur == 1)	include("mode/index.php");
+			else			include("mode/page.php");
 		}
 		else {
 			include("mode/".$curPage.".php");

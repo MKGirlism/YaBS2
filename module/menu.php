@@ -8,13 +8,13 @@ $u = $_SESSION['uname']['uname'];
 $i = $_SESSION['uname']['uid'];
 
 // Load Data
-$sql = "SELECT * FROM Pages ORDER BY Title ASC";
+$sql = "SELECT p.id, p.Title, p.Content, p.Privacy, g.BlogPurpose, g.Homepage FROM Pages AS p, General AS g ORDER BY Title ASC";
 $link = "SELECT * FROM Links ORDER BY Title ASC";
 
 $stmt = $mysqli->prepare($sql);
 $stmt->execute();
 
-$stmt->bind_result($id, $title, $body, $priv);
+$stmt->bind_result($id, $title, $body, $priv, $blopur, $home);
 
 //Start Menu.
 echo "<table id='Nav' class='outline margin'><tr class='NavHead1'><th>User</th></tr>";
@@ -54,9 +54,14 @@ echo "<tr class='NavCell0'><td>";
 echo "<ul id='userpanel' class='stackedmenu'>";
 
 // Menu
+$once = false;
 echo "<li><a href='index.php'>Home</a></li>";
 while ($stmt->fetch()) {
-        if ($priv <= 0 || $admin) echo "<li><a href='?mode=page&id=$id'>$title</a></li>";
+	if (!$once) {
+		$once = true;
+		if ($blopur == 2) echo "<li><a href='?mode=index'>Blog</a></li>";
+	}
+        if ($priv <= 0 || $admin) if ($id != $home) echo "<li><a href='?mode=page&id=$id'>$title</a></li>";
 }
 echo "</ul></td></tr>";
 

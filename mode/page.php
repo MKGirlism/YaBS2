@@ -6,7 +6,18 @@ $mysqli = new mysqli($hosty, $uname, $paswd, $dbnme);
 
 //Load data
 $aid = (int) $_GET['id'];
-$sql = "SELECT * FROM Pages WHERE id=".$aid;
+
+if (empty($aid)) {
+	$homepage = "SELECT Homepage FROM General";
+	$hopa = $mysqli->prepare($homepage);
+	$hopa->execute();
+	$hopa->bind_result($hp);
+	while ($hopa->fetch()) $hoppa = $hp;
+	$hopa->close();
+}
+
+if (empty($aid))	$sql = "SELECT * FROM Pages WHERE id=".$hoppa;
+else			$sql = "SELECT * FROM Pages WHERE id=".$aid;
 
 $stmt = $mysqli->prepare($sql);
 $stmt->execute();

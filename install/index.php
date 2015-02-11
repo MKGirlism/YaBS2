@@ -74,6 +74,8 @@ if ($_POST['Install']) {
   `Tags` varchar(255) NOT NULL,
   `Topbar` int(1) NOT NULL DEFAULT '1',
   `Theme` varchar(200) NOT NULL DEFAULT 'Yamisoft'
+  `BlogPurpose` int(1) NOT NULL DEFAULT '1',
+  `Homepage` int(6) NOT NULL DEFAULT '0',
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0;");
 	
 	echo "Table 'General' successfully created.<br />";
@@ -82,8 +84,8 @@ if ($_POST['Install']) {
 	$sitedecro = $_POST['sitedecro'];
 	$sitetags = $_POST['sitetags'];
 	
-	$mysqli->query("INSERT INTO `General` (`Name`, `Decro`, `Tags`, `Topbar`) VALUES
-('$sitename', '$sitedecro', '$sitetags', 1);");
+	$mysqli->query("INSERT INTO `General` (`Name`, `Decro`, `Tags`, `Topbar`, `Theme`, `BlogPurpose`, `Homepage`) VALUES
+('$sitename', '$sitedecro', '$sitetags', 1, 'Yamisoft', 1, 0);");
 	
 	echo "Table 'General' successfully inserted.<br />";
 	
