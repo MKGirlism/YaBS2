@@ -14,3 +14,6 @@ Credits:<br />
 - W3Schools, and PHP.net (which made the Switch from MySQL to MySQLi so easy).
 - WordPress (thanks to that, I started to make YaBS, because I found it way to heavy).
 - You (who will hopefully extend, and improve YaBS, together with us).
+
+Contributors:<br />
+- David Blaszyk (Smiley List, Dynamic Theme Changer, Customisable Homepage).
