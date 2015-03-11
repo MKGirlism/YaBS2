@@ -11,7 +11,7 @@
 	while ($stmt->fetch()) {
 	echo "<meta name=description content='$gdecro'>
 		<meta name=keywords content='$gtags'>
-		<meta name=generator content='YaBS 2.1'>
+		<meta name=generator content='YaBS 2.0'>
 		<link rel=stylesheet href='theme/$gtheme/style.css' type='text/css' media=screen id=stylesheet />
 		<title>$gsname</title>";
 	}
