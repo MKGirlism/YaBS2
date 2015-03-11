@@ -12,7 +12,7 @@ session_start();
 
 <?php
 $mysqli = new mysqli($hosty, $uname, $paswd, $dbnme);
-$bloguse = "SELECT BlogPurpose FROM General";
+$bloguse = "SELECT blog_purpose FROM blg_generic";
 
 $usage = $mysqli->prepare($bloguse);
 $usage->execute();
@@ -38,7 +38,12 @@ $mysqli->close();
 			else			include("mode/page.php");
 		}
 		else {
-			include("mode/".$curPage.".php");
+			if (file_exists("mode/".$curPage.".php")) {
+				include("mode/".$curPage.".php");
+			}
+			else {
+				include("mode/error.php");
+			}
 		}
 	?>
 	</div>

@@ -8,11 +8,11 @@
 			echo "Wrong answer, try again.";
 		}
 		else {
-			if(empty($_POST['uname'])) {
+			if(empty($_POST['username'])) {
 				die("Please enter a username.");
 			}
 			
-			if(empty($_POST['passwd'])) {
+			if(empty($_POST['password'])) {
 				die("Please enter a password.");
 			}
 			
@@ -20,8 +20,8 @@
 				die("Invalid E-Mail Address");
 			}
 			
-			$query = "SELECT 1 FROM Users WHERE uname = :uname";
-			$query_params = array(':uname' => $_POST['uname']);
+			$query = "SELECT 1 FROM $userb WHERE username = :username";
+			$query_params = array(':username' => $_POST['username']);
 			
 			try {
 				$stmt = $db->prepare($query);
@@ -35,7 +35,7 @@
 				die("This username is already in use");
 			}
 			
-			$query = "SELECT 1 FROM Users WHERE email = :email";
+			$query = "SELECT 1 FROM $userb WHERE email = :email";
 			$query_params = array(':email' => $_POST['email']);
 			
 			try {
@@ -52,17 +52,17 @@
 				die("This email address is already registered");
 			}
 			
-			$query = "INSERT INTO Users (uname, passwd, salt, email)
-			VALUES (:uname, :passwd, :salt, :email)";
+			$query = "INSERT INTO $userb (username, password, salt, email)
+			VALUES (:username, :password, :salt, :email)";
 			
 			$salt = dechex(mt_rand(0, 2147483647)) . dechex(mt_rand(0, 2147483647));
-			$passwd = hash('sha256', $_POST['passwd'] . $salt);
+			$passwd = hash('sha256', $_POST['password'] . $salt);
 			
 			for($round = 0; $round < 65536; $round++) {
 				$passwd = hash('sha256', $passwd . $salt);
 			}
 			
-			$query_params = array(':uname' => $_POST['uname'], ':passwd' => $passwd, ':salt' => $salt, ':email' => $_POST['email']);
+			$query_params = array(':username' => $_POST['username'], ':password' => $passwd, ':salt' => $salt, ':email' => $_POST['email']);
 			
 			try {
 				$stmt = $db->prepare($query);
@@ -90,9 +90,9 @@
 	<div id='Main'>
 	<h1>Register</h1>
 	<form action="register.php" method="post">
-		Username: <input type="text" name="uname" value="" /><br />
+		Username: <input type="text" name="username" value="" /><br />
 		Email: <input type="text" name="email" value="" /><br />
-		Password: <input type="password" name="passwd" value="" /><br />
+		Password: <input type="password" name="password" value="" /><br />
 		How much is two plus three minus one? (Numeric answer) <input type="text" name="sec" /><br />
 		<input type="submit" value="Register" />
 	</form>

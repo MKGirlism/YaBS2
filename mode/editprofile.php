@@ -1,6 +1,6 @@
 <?php
 	require("common.php");
-	if(empty($_SESSION['uname'])) {
+	if(empty($_SESSION['username'])) {
                 header("Location: login.php");
                 die("Redirecting to login.php");
         }
@@ -9,8 +9,8 @@
                         die("Invalid Email Address");
                 }
 		
-                if($_POST['email'] != $_SESSION['uname']['email']) {
-                        $query = "SELECT 1 FROM Users WHERE email = :email";
+                if($_POST['email'] != $_SESSION['username']['email']) {
+                        $query = "SELECT 1 FROM $userb WHERE email = :email";
                         $query_params = array(':email' => $_POST['email']);
 
                         try {
@@ -39,21 +39,21 @@
                         $salt = null;
                 }
 		
-		$query_params = array(':email' => $_POST['email'], ':uid' => $_SESSION['uname']['uid']);
-                $query_params[':ava'] = $_POST['ava'];
+		$query_params = array(':email' => $_POST['email'], ':id' => $_POST['id']);
+                $query_params[':avatar'] = $_POST['avatar'];
 		
 		if($passwd !== null) {
-                        $query_params[':passwd'] = $passwd;
+                        $query_params[':password'] = $passwd;
                         $query_params[':salt'] = $salt;
                 }
 		
-                $query = "UPDATE Users SET email = :email, ava = :ava";
+                $query = "UPDATE $userb SET email = :email, avatar = :avatar";
 		
                 if($passwd !== null) {
-                        $query .= ", passwd = :passwd, salt = :salt";
+                        $query .= ", password = :password, salt = :salt";
                 }
 		
-                $query .= " WHERE uid = :uid";
+                $query .= " WHERE id = :id";
 		
 		try {
                         $stmt = $db->prepare($query);
@@ -69,14 +69,28 @@
                 die("Redirecting to index.php");
 	}
 	else {
+		$aid = $_GET['uid'];
+		
+		$mysqli = new mysqli($hosty, $uname, $paswd, $dbnme);
+		$stmt = $mysqli->prepare("SELECT `id`, `username`, `email`, `avatar` FROM $userb WHERE id = ".$aid);
+		$stmt->execute();
+		
+		$stmt->bind_result($uid, $uuname, $uemail, $uava);
+		
+		while ($stmt->fetch()) {
 echo "<center><h1>Edit Account</h1></center>
 <form action=\"?mode=editprofile\" method=\"post\">
-        Username: <b>". htmlentities($_SESSION['uname']['uname'], ENT_QUOTES, 'UTF-8')."</b><br /><br />
-        Email:<br /><input type=\"text\" name=\"email\" value=\"". htmlentities($_SESSION['uname']['email'], ENT_QUOTES, 'UTF-8') ."\" /><br />
-        Avatar:<br /><input type=\"text\" name=\"ava\" value=\"". htmlentities($_SESSION['uname']['ava'], ENT_QUOTES, 'UTF-8') ."\" /><br />
-        Password:<br /><input type=\"password\" name=\"passwd\" value=\"\" /><br />
+        Username: <b>$uuname</b><br /><br />
+	<input type=\"text\" name=\"id\" value=\"$uid\" hidden>
+        Email:<br /><input type=\"text\" name=\"email\" value=\"$uemail\" /><br />
+        Avatar:<br /><input type=\"text\" name=\"avatar\" value=\"$uava\" /><br />
+        Password:<br /><input type=\"password\" name=\"password\" value=\"\" /><br />
         <i>(Leave blank if you don't want to change your password)</i><br />
         <input type=\"submit\" value=\"Update Account\" /><br />
 </form><br />";
+		}
+		
+		$stmt->close();
+		$mysqli->close();
 	}
 ?>

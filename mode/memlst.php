@@ -1,13 +1,13 @@
 <?php
 	require("common.php");
-	$powza = htmlentities($_SESSION['uname']['group'], ENT_QUOTES, 'UTF-8');
+	$powza = htmlentities($_SESSION['username']['group'], ENT_QUOTES, 'UTF-8');
 	
 	if($powza <= 0) {
 		header('Location: index.php');
         exit();
 	}
 	
-	$query = "SELECT * FROM Users";
+	$query = "SELECT * FROM $userb";
 	
 	try {
 		$stmt = $db->prepare($query);
@@ -30,14 +30,14 @@
 	</tr>
 	<?php foreach($rows as $row): ?>
 	<tr>
-		<td bgcolor=#FFF><img src="<?php echo htmlentities($row['ava'], ENT_QUOTES, 'UTF-8'); ?>" width="20px" /></td>
+		<td bgcolor=#FFF><img src="<?php echo htmlentities($row['avatar'], ENT_QUOTES, 'UTF-8'); ?>" width="20px" /></td>
 		<td bgcolor=#FFF><?php
-		echo "<a href='?mode=profile&uid=".htmlentities($row['uid'], ENT_QUOTES, 'UTF-8')."'>";
+		echo "<a href='?mode=profile&uid=".htmlentities($row['id'], ENT_QUOTES, 'UTF-8')."'>";
 		echo "<span style=color:#800080>";
-		echo htmlentities($row['uname'], ENT_QUOTES, 'UTF-8');
+		echo htmlentities($row['username'], ENT_QUOTES, 'UTF-8');
 		echo "</span></a>"; ?></td>
 		<td bgcolor=#FFF><?php echo "<span style='color:blue'>".htmlentities($row['email'], ENT_QUOTES, 'UTF-8')."</span>"; ?></td>
-		<td bgcolor=#FFF><?php echo "<a href='?mode=userdel&uid=".htmlentities($row['uid'], ENT_QUOTES, 'UTF-8')."'>Delete</a>"; ?></td>
+		<td bgcolor=#FFF><?php echo "<a href='?mode=userdel&uid=".htmlentities($row['id'], ENT_QUOTES, 'UTF-8')."'>Delete</a>"; ?></td>
 	</tr>
 	<?php endforeach; ?>
 </table>

@@ -1,8 +1,8 @@
 <?php
 // Ensure, that nobody, other than the Admin, can come here.
 ob_start();
-$powza = htmlentities($_SESSION['uname']['group'], ENT_QUOTES, 'UTF-8');
-if ($powza <= 0)
+$powza = htmlentities($_SESSION['username']['group'], ENT_QUOTES, 'UTF-8');
+if ($powza <= 1)
 {
         header('Location: index.php');
         exit();
@@ -21,7 +21,7 @@ echo "<a href='?mode=memlst'>Return</a><br /><br />";
 
 // Execute after clicking "Submit".
 if ($_POST['Yes']) {
-	$update = "DELETE FROM Users WHERE uid=".$aid;
+	$update = "DELETE FROM $userb WHERE id=".$aid;
 	$result = $mysqli->query($update);
 
 	if ($result) {

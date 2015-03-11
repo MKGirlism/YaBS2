@@ -1,10 +1,10 @@
-YaBS 2.0 Beta
+YaBS 2.0
 =====
 
 The first pure Blogging System, ever seen, since ages.<br />
 YaBS is Designed, to be lightweight, secure, beautiful, and meant for what it's made for: Blogs.<br />
-YaBS 2.0 will be Launched, with many improvements, and additional features, making YaBS even more interesting, for general Bloggers.<br /><br />
-Release Date: 30-07-2015<br />
+YaBS 2.0 has Launched, with many improvements, and additional features, making YaBS even more interesting, for general Bloggers.<br /><br />
+Release Date: 11-03-2015<br />
 More information: http://www.yamisoft.wtf<br /><br />
 
 Credits:<br />

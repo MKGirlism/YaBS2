@@ -6,26 +6,26 @@ if ($id < 1)
         exit();
 }
 
-$admin = htmlentities($_SESSION['uname']['group'], ENT_QUOTES, 'UTF-8') == 1;
+$admin = htmlentities($_SESSION['username']['group'], ENT_QUOTES, 'UTF-8') >= 1;
 
 //MySQL
 $mysqli = new mysqli($hosty, $uname, $paswd, $dbnme);
 
 //Load data
 $aid = (int) $_GET['uid'];
-$sql = "SELECT uid, uname, email, ava FROM Users WHERE uid=".$aid;
+$sql = "SELECT id, username, email, avatar FROM $userb WHERE id = ".$aid;
 
 $stmt = $mysqli->prepare($sql);
 $stmt->execute();
 
-$stmt->bind_result($uid, $uname, $email, $ava);
+$stmt->bind_result($uuid, $uuname, $uemail, $uava);
 
-$owner = htmlentities($_SESSION['uname']['uname'], ENT_QUOTES, 'UTF-8');
+$owner = htmlentities($_SESSION['username']['username'], ENT_QUOTES, 'UTF-8');
 
 while ($stmt->fetch()) {
-        if ($admin || $owner == $uname) echo "<div id='AddButton' class='AddButton'><a href='?mode=editprofile&uid=$aid'>Edit</a></div>";
-        echo "<img src='$ava' /><br />$uname";
-	if ($admin || $owner == $uname) echo "<br />$email";
+        if ($admin || $owner == $uuname) echo "<div id='AddButton' class='AddButton'><a href='?mode=editprofile&uid=$aid'>Edit</a></div>";
+        echo "<img src='$uava' /><br />$uuname";
+	if ($admin || $owner == $uuname) echo "<br />$uemail";
 	echo "<br /><br />";
 }
 

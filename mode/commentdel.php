@@ -3,10 +3,10 @@
 $mysqli = new mysqli($hosty, $uname, $paswd, $dbnme);
 
 $aid = (int) $_GET['id'];
-$powza = htmlentities($_SESSION['uname']['group'], ENT_QUOTES, 'UTF-8');
+$powza = htmlentities($_SESSION['username']['group'], ENT_QUOTES, 'UTF-8');
 
-$uid = htmlentities($_SESSION['uname']['uid'], ENT_QUOTES, 'UTF-8');
-$select = "SELECT uid FROM Comments WHERE uid = ".$uid;
+$uid = htmlentities($_SESSION['username']['id'], ENT_QUOTES, 'UTF-8');
+$select = "SELECT user_id FROM blg_comments WHERE user_id = ".$uid;
 $results = $mysqli->query($select);
 
 include("module/postfunctions.php");
@@ -24,7 +24,7 @@ else {
 	
 	// Execute after clicking "Submit".
 	if ($_POST['Delete']) {
-	        $update = "UPDATE Comments AS c SET c.delete = 1 WHERE c.id = ".$aid;
+	        $update = "UPDATE blg_comments AS c SET c.delete = 1 WHERE c.id = ".$aid;
 	        $result = $mysqli->query($update);
 		
 		echo "<h2>Delete Comment</h2>";
@@ -37,7 +37,7 @@ else {
 	}
 	
 	else if ($_POST['Undelete']) {
-		$update = "UPDATE Comments AS c SET c.delete = 0 WHERE c.id = ".$aid;
+		$update = "UPDATE blg_comments AS c SET c.delete = 0 WHERE c.id = ".$aid;
 	        $result = $mysqli->query($update);
 		
 		echo "<h2>Delete Comment</h2>";
@@ -50,17 +50,17 @@ else {
 	}
 	
 	else {
-		$select = "SELECT c.delete FROM Comments AS c WHERE c.id = ".$aid;
+		$select = "SELECT c.delete FROM blg_comments AS c WHERE c.id = ".$aid;
 		$stmt = $mysqli->prepare($select);
 		$stmt->execute();
 		
-		$stmt->bind_result($del);
+		$stmt->bind_result($cdel);
 		
 		while ($stmt->fetch()) {
 	        	echo "<h2>Delete Comment</h2>";
 	        	echo "<form action='?mode=commentdel&id=$aid' method='post'>";
 	        	echo "Choose your Action.<br />";
-			if ($del == 0)
+			if ($cdel == 0)
 	        		echo "<input name='Delete' type='submit' value='Remove' /> <input name='Undelete' type='submit' value='Unremove' disabled /></div>";
 			else
 				echo "<input name='Delete' type='submit' value='Remove' disabled /> <input name='Undelete' type='submit' value='Unremove' /></div>";

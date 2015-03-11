@@ -1,8 +1,8 @@
 <?php
 // Ensure, that nobody, other than the Admin, can come here.
 ob_start();
-$powza = htmlentities($_SESSION['uname']['group'], ENT_QUOTES, 'UTF-8');
-if ($powza <= 0)
+$powza = htmlentities($_SESSION['username']['group'], ENT_QUOTES, 'UTF-8');
+if ($powza <= 1)
 {
         header('Location: index.php');
         exit();
@@ -22,7 +22,7 @@ if ($_POST['Submit']) {
 	$url = $mysqli->real_escape_string($_POST['URL']);
 
 	// Put it in a MySQL Insert Query, and execute it!
-	$insert = "INSERT INTO Links (id, Title, URL) VALUES (NULL, '$name', '$url')";
+	$insert = "INSERT INTO blg_links (id, title, url) VALUES (NULL, '$name', '$url')";
 	$result = $mysqli->query($insert);
 
 	// Make sure you ALWAYS close the Query, and go to the next one.

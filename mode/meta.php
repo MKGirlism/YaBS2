@@ -1,8 +1,8 @@
 <?php
 // Ensure, that nobody, other than the Admin, can come here.
 ob_start();
-$powza = htmlentities($_SESSION['uname']['group'], ENT_QUOTES, 'UTF-8');
-if ($powza <= 0)
+$powza = htmlentities($_SESSION['username']['group'], ENT_QUOTES, 'UTF-8');
+if ($powza <= 1)
 {
         header('Location: index.php');
         exit();
@@ -23,7 +23,7 @@ if ($_POST['Submit']) {
 	if ($spurp == 1)	$shome = 0;
 	else			$shome = $_POST['Homepage'];
 	
-	$update = "UPDATE General SET Name='$sname', Decro='$sdec', Tags='$stags', Topbar='$top', Theme='$stheme', BlogPurpose='$spurp', Homepage='$shome'";
+	$update = "UPDATE blg_generic SET site_name = '$sname', description = '$sdec', tags = '$stags', topbar = '$top', theme = '$stheme', blog_purpose = '$spurp', homepage = '$shome'";
 	$result = $mysqli->query($update);
 	
 	if ($result) {
@@ -36,29 +36,29 @@ if ($_POST['Submit']) {
 }
 
 else {
-	$sql = "SELECT * FROM General";
-	$sql2 = "SELECT id, Title FROM Pages";
+	$sql = "SELECT * FROM blg_generic";
+	$sql2 = "SELECT id, title FROM blg_pages";
 	
 	$stmt = $mysqli->prepare($sql);
 	$stmt->execute();
 	
-	$stmt->bind_result($sname, $sdec, $stags, $top, $stheme, $spurp, $shome);
+	$stmt->bind_result($gsname, $gdec, $gtags, $gtop, $gtheme, $gpurp, $ghome);
 	
 	while ($stmt->fetch()) {
 		echo "<script type='text/javascript' src='module/codebutton.js'></script>";
 		echo "<h2>Edit Site Information</h2>";
 		echo "<a href='index.php'>Return</a><br /><br />";
 		echo "<form action='?mode=meta' method='post'>";
-		echo "Site Name: <input type='text' name='Name' value='".$sname."'><br />";
-		echo "Description: <input type='text' name='Decro' value='".$sdec."'><br />";
-		echo "Tags: <input type='text' name='Tags' value='".$stags."'><br /><br />";
+		echo "Site Name: <input type='text' name='Name' value='".$gsname."'><br />";
+		echo "Description: <input type='text' name='Decro' value='".$gdec."'><br />";
+		echo "Tags: <input type='text' name='Tags' value='".$gtags."'><br /><br />";
 		echo "Topbar:<br />
 		<select name='Topbar'>";
 ?>
-			<option value='0' <?php if ($top == 0) echo "selected='selected'"; ?>>Off</option>
-			<option value='1' <?php if ($top == 1) echo "selected='selected'"; ?>>Random Jokes</option>
-			<option value='2' <?php if ($top == 2) echo "selected='selected'"; ?>>Users Online</option>
-			<option value='3' <?php if ($top == 3) echo "selected='selected'"; ?>>Search</option>
+			<option value='0' <?php if ($gtop == 0) echo "selected='selected'"; ?>>Off</option>
+			<option value='1' <?php if ($gtop == 1) echo "selected='selected'"; ?>>Random Jokes</option>
+			<option value='2' <?php if ($gtop == 2) echo "selected='selected'"; ?>>Users Online</option>
+			<option value='3' <?php if ($gtop == 3) echo "selected='selected'"; ?>>Search</option>
 <?php
 		echo "</select><br />";
 		echo "Theme:<br />
@@ -74,12 +74,12 @@ else {
 		echo "Blog has (a) 
 		<select name='BlogPurpose'>";
 ?>
-			<option value='1' <?php if ($spurp == 1) echo "selected='selected'"; ?>>Main</option>
-			<option value='2' <?php if ($spurp == 2) echo "selected='selected'"; ?>>Side</option>
-			<option value='3' <?php if ($spurp == 3) echo "selected='selected'"; ?>>No</option>
+			<option value='1' <?php if ($gpurp == 1) echo "selected='selected'"; ?>>Main</option>
+			<option value='2' <?php if ($gpurp == 2) echo "selected='selected'"; ?>>Side</option>
+			<option value='3' <?php if ($gpurp == 3) echo "selected='selected'"; ?>>No</option>
 <?php
 		echo "</select> purpose.<br />";
-		$hpage = $shome;
+		$hpage = $ghome;
 		$stmt->close();
 		
 		$stmt2 = $mysqli->prepare($sql2);
@@ -90,9 +90,11 @@ else {
 		echo "Homepage (if Side or No Purpose):<br />
 		<select name='Homepage'>";
 			while ($stmt2->fetch()) {
+//				echo "<select value='Homepage'>";
 				echo "<option value='$pid'";
 				if ($hpage == $pid) echo "selected='selected'";
 				echo ">$pid. $ptitle</option>";
+//				echo "</select><br />";
 			}
 		echo "</select><br />";
 		echo "<input name='Submit' type='submit' value='Edit'>

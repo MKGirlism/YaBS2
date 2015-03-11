@@ -17,6 +17,7 @@ include("module/postfunctions.php");
 
 // Execute, as soon as the Posting starts.
 if ($_POST['submit']) {
+echo "1";
         // MySQL
 	$con = mysqli_connect($hosty, $uname, $paswd, $dbnme);
         
@@ -25,12 +26,12 @@ if ($_POST['submit']) {
         $message2 = nl2br($message);
         
 	// Better Username, and Date
-	$uid = $_SESSION['uname']['uid'];
+	$uid = $_SESSION['username']['id'];
         $date = mktime();
 	$ipaddress = $_SERVER['REMOTE_ADDR'];
 	
 	// Put it in the Database, and Inform the User, about it.
-	$query = "INSERT INTO Comments (id, pid, message, uid, date, ipaddress) VALUES (NULL, $id, '$message2', $uid, $date, '$ipaddress')";
+	$query = "INSERT INTO blg_comments (id, post_id, message, user_id, post_date, ip_address) VALUES (NULL, $id, '$message2', $uid, $date, '$ipaddress')";
 	
 	mysqli_query($con, $query);
 	echo "Comment Posted.<br /><a href='?mode=post&id=".$id."'>View Comment</a>";

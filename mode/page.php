@@ -1,5 +1,5 @@
 <?php
-$admin = htmlentities($_SESSION['uname']['group'], ENT_QUOTES, 'UTF-8') == 1;
+$admin = htmlentities($_SESSION['username']['group'], ENT_QUOTES, 'UTF-8') >= 1;
 
 //MySQL
 $mysqli = new mysqli($hosty, $uname, $paswd, $dbnme);
@@ -8,7 +8,7 @@ $mysqli = new mysqli($hosty, $uname, $paswd, $dbnme);
 $aid = (int) $_GET['id'];
 
 if (empty($aid)) {
-	$homepage = "SELECT Homepage FROM General";
+	$homepage = "SELECT homepage FROM blg_generic";
 	$hopa = $mysqli->prepare($homepage);
 	$hopa->execute();
 	$hopa->bind_result($hp);
@@ -16,19 +16,19 @@ if (empty($aid)) {
 	$hopa->close();
 }
 
-if (empty($aid))	$sql = "SELECT * FROM Pages WHERE id=".$hoppa;
-else			$sql = "SELECT * FROM Pages WHERE id=".$aid;
+if (empty($aid))	$sql = "SELECT * FROM blg_pages WHERE id = ".$hoppa;
+else			$sql = "SELECT * FROM blg_pages WHERE id = ".$aid;
 
 $stmt = $mysqli->prepare($sql);
 $stmt->execute();
 
-$stmt->bind_result($id, $title, $body, $priv);
+$stmt->bind_result($pid, $ptitle, $pbody, $ppriv);
 
 include("module/postfunctions.php");
 while ($stmt->fetch()) {
-	if ($priv <= 1 || $admin) {
+	if ($ppriv <= 1 || $admin) {
 		if ($admin) echo "<div id='AddButton' class='AddButton'><a href='?mode=pageedit&id=$aid'>Edit</a> | <a href='?mode=pagedel&id=$aid'>Delete</a></div>";
-    	echo "<div id='BlogTitle'>$title</div><br /><div id='BlogBody'>".getBBCode(getSmile($body));
+    	echo "<div id='BlogTitle'>$ptitle</div><br /><div id='BlogBody'>".getBBCode(getSmile($pbody));
 		echo "</div><br /><br />";
 	}
 }

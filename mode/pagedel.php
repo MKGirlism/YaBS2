@@ -1,7 +1,7 @@
 <?php
 // Ensure, that nobody, other than the Admin, can come here.
 ob_start();
-$powza = htmlentities($_SESSION['uname']['group'], ENT_QUOTES, 'UTF-8');
+$powza = htmlentities($_SESSION['username']['group'], ENT_QUOTES, 'UTF-8');
 if ($powza <= 0)
 {
         header('Location: index.php');
@@ -21,7 +21,7 @@ echo "<a href='index.php'>Return</a><br /><br />";
 
 // Execute after clicking "Submit".
 if ($_POST['Yes']) {
-	$update = "DELETE FROM Pages WHERE id=".$aid;
+	$update = "DELETE FROM blg_pages WHERE id = ".$aid;
 	$result = $mysqli->query($update);
 
 	if ($result) {

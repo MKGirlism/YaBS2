@@ -1,7 +1,7 @@
 <?php
 // Ensure, that nobody, other than the Admin, can come here.
 ob_start();
-$powza = htmlentities($_SESSION['uname']['group'], ENT_QUOTES, 'UTF-8');
+$powza = htmlentities($_SESSION['username']['group'], ENT_QUOTES, 'UTF-8');
 if ($powza <= 0)
 {
         header('Location: index.php');
@@ -21,12 +21,12 @@ echo "<a href='index.php'>Return</a><br /><br />";
 
 // Execute after clicking "Submit".
 if ($_POST['Yes']) {
-	$update = "DELETE FROM Blogs WHERE id=".$aid;
+	$update = "DELETE FROM blg_blogs WHERE id = ".$aid;
 	$result = $mysqli->query($update);
 
 	if ($result) {
-        $result->close();
-        $mysqli->close();
+        	$result->close();
+        	$mysqli->close();
 	}
 
 	echo "<h2>Delete Post</h2>";
@@ -40,7 +40,7 @@ else if ($_POST['No']) {
 
 else {
 	echo "<h2>Delete Post</h2>";
-	echo "<form action='?mode=pagedel&id=$aid' method='post'>";
+	echo "<form action='?mode=postdel&id=$aid' method='post'>";
 	echo "Are you sure?<br />";
 	echo "<input name='Yes' type='submit' value='Yes'> <input name='No' type='submit' value='No'></div>";
 	echo "</form><br /><br />";

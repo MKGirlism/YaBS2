@@ -1,7 +1,7 @@
 <?php
 // Ensure, that nobody, other than the Admin, can come here.
 ob_start();
-$powza = htmlentities($_SESSION['uname']['group'], ENT_QUOTES, 'UTF-8');
+$powza = htmlentities($_SESSION['username']['group'], ENT_QUOTES, 'UTF-8');
 if ($powza <= 0)
 {
         header('Location: index.php');
@@ -21,14 +21,14 @@ if ($_POST['Submit']) {
 	// Escape the Strings in the Title, and Content, otherwise, you'll get into trouble.
 	// Also, automatically add Enters, in the Content.
 	$name = $mysqli->real_escape_string($_POST['Title']);
-	$auth = $_SESSION['uname']['uid'];
+	$auth = $_SESSION['username']['id'];
 	$date = mktime();
 	$cont = $_POST['Content'];
 	$cont2 = $mysqli->real_escape_string(nl2br($cont));
 	$pr = $_POST['Privacy'];
 
 	// Put it in a MySQL Insert Query, and execute it!
-	$insert = "INSERT INTO Blogs (id, Name, Content, uid, Date, Privacy) VALUES (NULL, '$name', '$cont2', '$auth', '$date', $pr)";
+	$insert = "INSERT INTO blg_blogs (id, title, message, user_id, post_date, privacy) VALUES (NULL, '$name', '$cont2', '$auth', '$date', $pr)";
 	$result = $mysqli->query($insert);
 
 	// Make sure you ALWAYS close the Query, and go to the next one.
@@ -46,7 +46,7 @@ else {
 	echo "<h2>Add Post</h2>";
 	echo "<form action='?mode=postadd' method='post'>
 <div id='BlogTitle'><input type='text' name='Title'></div><br />
-<div id='BlogData'>".$_SESSION['uname']['uname']." | ".date('Y-m-d')."</div>
+<div id='BlogData'>".$_SESSION['username']['username']." | ".date('Y-m-d')."</div>
 <div id='BlogBody'>";
 include ("module/textbuttons.php");
 

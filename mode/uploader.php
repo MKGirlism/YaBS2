@@ -6,8 +6,8 @@
         $image = $img_dir . basename($_FILES["Image"]["name"]);
         $uploadOK = 1;
         $imageFileType = pathinfo($image, PATHINFO_EXTENSION);
-	$userid = $_SESSION['uname']['uid'];
-	$insert = "INSERT INTO Images (id, uid, URL) VALUES (NULL, $userid, '$image')";
+	$userid = $_SESSION['username']['id'];
+	$insert = "INSERT INTO blg_uploads (id, user_id, url) VALUES (NULL, $userid, '$image')";
 	
         if (isset($_POST["submit"])) {
                 if (file_exists($image)) {
@@ -43,28 +43,28 @@
 	// Load Data
 	if (isset($_GET["page"])) $page = $_GET["page"]; else $page = 1;
 	$start_from = ($page-1) * 5;
-	$sql = "SELECT i.id, i.uid, i.url, u.uid, u.uname FROM Images AS i, Users AS u WHERE i.uid = u.uid ORDER BY i.id DESC LIMIT $start_from, 5";
+	$sql = "SELECT up.id, up.user_id, up.url, us.id, us.username FROM blg_uploads AS up, $userb AS us WHERE up.user_id = us.id ORDER BY up.id DESC LIMIT $start_from, 5";
 	$stmt = $mysqli->prepare($sql);
 	$stmt->execute();
 	
-	$stmt->bind_result($id, $uidI, $url, $uidU, $user);
+	$stmt->bind_result($upid, $upuid, $upurl, $usuid, $ususer);
 	
 	echo "<table border='0' cellpadding='2' width='100%'>";
 	while ($stmt->fetch()) {
-		echo "<td><a href='$url'><img src='$url' alt='$user\'s Submission' width=100 height=100 /></a><br />By <a href='?mode=profile&uid=$uidU'>$user</a></td>";
+		echo "<td><a href='$upurl'><img src='$upurl' alt='$ususer\'s Submission' width=100 height=100 /></a><br />By <a href='?mode=profile&uid=$usuid'>$ususer</a></td>";
 	}
 	echo "</table>";
 	
 	$stmt->close();
 	
 	echo "<br />";
-	$row = mysqli_fetch_row(mysqli_query($mysqli,"SELECT COUNT(URL) FROM Images"));
+	$row = mysqli_fetch_row(mysqli_query($mysqli,"SELECT COUNT(url) FROM blg_uploads"));
 	$total_records = $row[0];
 	$total_pages = ceil($total_records / 5);
 	for ($i = 1; $i <= $total_pages; $i++)
 		echo "<a href='?mode=uploader&page=".$i."'>".$i." </a>"; 
 	
-	if (!empty($_SESSION['uname'])) {
+	if (!empty($_SESSION['username'])) {
 ?>
 <h1>Upload</h1><br />
 <form action="?mode=uploader" method="post" enctype="multipart/form-data">

@@ -1,7 +1,7 @@
 <?php
 // Ensure, that nobody, other than the Admin, can come here.
 ob_start();
-$powza = htmlentities($_SESSION['uname']['group'], ENT_QUOTES, 'UTF-8');
+$powza = htmlentities($_SESSION['username']['group'], ENT_QUOTES, 'UTF-8');
 if ($powza <= 0)
 {
         header('Location: index.php');
@@ -24,7 +24,7 @@ if ($_POST['Submit']) {
 	$pr = $_POST['Privacy'];
 
 	// Put it in a MySQL Insert Query, and execute it!
-	$insert = "INSERT INTO Pages (id, Title, Content, Privacy) VALUES (NULL, '$name', '$cont2', $pr)";
+	$insert = "INSERT INTO blg_pages (id, title, message, privacy) VALUES (NULL, '$name', '$cont2', $pr)";
 	$result = $mysqli->query($insert);
 
 	// Make sure you ALWAYS close the Query, and go to the next one.

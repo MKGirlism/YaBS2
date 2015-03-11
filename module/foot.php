@@ -1,15 +1,16 @@
 <?php
 	$mysqli = new mysqli($hosty, $uname, $paswd, $dbnme);
 	
-	$sql = "SELECT `Name` FROM `General`";
+	$sql = "SELECT `site_name` FROM `blg_generic`";
 	$stmt = $mysqli->prepare($sql);
-echo $mysqli->error;
+	echo $mysqli->error;
+	
 	$stmt->execute();
 	
-	$stmt->bind_result($sname);
+	$stmt->bind_result($gsname);
 	
 	while ($stmt->fetch()) {
-		echo "<br /><br />$sname, Blog Software by <a href='http://www.yamisoft.wtf'>Yamisoft</a>.";
+		echo "<br /><br />$gsname, Powered by <a href='http://www.yamisoft.wtf'>YaBS 2.0</a>.";
 	}
 	
 	$stmt->close();

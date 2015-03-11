@@ -6,8 +6,8 @@
 	// If you Login.
 	if(!empty($_POST)) {
 		// MySQL
-		$query = "SELECT * FROM Users WHERE uname = :uname";
-		$query_params = array(':uname' => $_POST['uname']);
+		$query = "SELECT * FROM $userb WHERE username = :username";
+		$query_params = array(':username' => $_POST['username']);
 		
 		// Execute the Query, or give a meaningful Error Message.
 		try {
@@ -23,13 +23,13 @@
 		
 		// Check if the Password matches SHA256 and Salt Encryption.
 		if($row) {
-			$check_password = hash('sha256', $_POST['passwd'] . $row['salt']);
+			$check_password = hash('sha256', $_POST['password'] . $row['salt']);
 			for($round = 0; $round < 65536; $round++) {
 				$check_password = hash('sha256', $check_password . $row['salt']); 
 			}
 			
 			// If everything goes well, proceed the Login.
-			if($check_password === $row['passwd']) {
+			if($check_password === $row['password']) {
 				$login_ok = true;
 			}
 		}
@@ -37,8 +37,8 @@
 		// Forget about the Password, and set the Username and Group. After that, go to the Index.
 		if($login_ok) {
 			unset($row['salt']);
-			unset($row['passwd']);
-			$_SESSION['uname'] = $row;
+			unset($row['password']);
+			$_SESSION['username'] = $row;
 			$_SESSION['group'] = $row;
 			header("Location: index.php");
 			die("Redirecting to: index.php");
@@ -47,7 +47,7 @@
 		// Execute this, if it fails.
 		else {
 			print("Login Failed. Username given: "); 
-			$submitted_username = htmlentities($_POST['uname'], ENT_QUOTES, 'UTF-8');
+			$submitted_username = htmlentities($_POST['username'], ENT_QUOTES, 'UTF-8');
 			print($submitted_username);
 		}
 	}
@@ -66,8 +66,8 @@
 	<div id='Main'>
 	<h1>Login</h1>
 	<form action="login.php" method="post">
-		Username: <input type="text" name="uname" value="<?php echo $submitted_username; ?>" /><br />
-		Password: <input type="password" name="passwd" value="" /><br />
+		Username: <input type="text" name="username" value="<?php echo $submitted_username; ?>" /><br />
+		Password: <input type="password" name="password" value="" /><br />
 		<input type="submit" value="Login" />
 	</form>
 	<a href="register.php">Register</a>

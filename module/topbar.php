@@ -1,7 +1,7 @@
 <?php
 	$mysqli = new mysqli($hosty, $uname, $paswd, $dbnme);
 	
-	$top = "SELECT Topbar FROM General";
+	$top = "SELECT topbar FROM blg_generic";
 	$toppy = $mysqli->prepare($top);
 	$toppy->execute();
 	
@@ -15,8 +15,8 @@
 	
 	$toppy->close;
 	
-	if (isset($_SESSION['uname']['uname'])) {
-		$member = $_SESSION['uname']['uname'];
+	if (isset($_SESSION['username']['username'])) {
+		$member = $_SESSION['username']['username'];
 	}
 	
 	$time = time();
@@ -24,19 +24,19 @@
 	$static = $time + 1;
 	$timeout = $time - $past;
 	
-	$joke = "SELECT Text FROM Jokes ORDER BY rand() LIMIT 1";
-	$uonline = "SELECT uid, uname, ava, ontime, online FROM Users WHERE uname = '$member' AND ontime > $timeout";
+	$joke = "SELECT joke FROM blg_jokes ORDER BY rand() LIMIT 1";
+	$uonline = "SELECT id, username, avatar, ontime, online FROM $userb WHERE username = '$member' AND ontime > $timeout";
 	
 	// Random Jokes.
 	$joker = $mysqli->prepare($joke);
 	$joker->execute();
 	
-	$joker->bind_result($jtext);
+	$joker->bind_result($jjoke);
 	
 	if ($topbar == 1) {
 		echo "<b>Random Joke: </b> ";
 		while ($joker->fetch()) {
-		        echo $jtext;
+		        echo $jjoke;
 		}
 	}
 	
@@ -46,11 +46,11 @@
 	$uon = $mysqli->prepare($uonline);
 	$uon->execute();
 	
-	$uon->bind_result($uid, $usname, $uava, $uontime, $uonliner);
+	$uon->bind_result($uid, $uuname, $uava, $uontime, $uonliner);
 	
-	if (!isset($usname)) {
+	if (!isset($uuname)) {
 		$uon->close();
-		$sqli = "UPDATE Users SET ontime = $time, online = 1 WHERE uname = '$member'";
+		$sqli = "UPDATE $userb SET ontime = $time, online = 1 WHERE username = '$member'";
 		$mysqli->query($sqli);
 	}
 	
@@ -58,18 +58,18 @@
 	
 	$con = mysqli_connect($hosty, $uname, $paswd, $dbnme);
 	
-	$query = "SELECT uid, uname, ava, ontime, online FROM Users WHERE ontime > $past";
+	$query = "SELECT id, username, avatar, ontime, online FROM $userb WHERE ontime > $past";
 	$prep = mysqli_query($con, $query);
 	$row = mysqli_fetch_assoc($prep);
 	
 	if ($topbar == 2) {
 		echo "<b>Users online: </b>";
 		if ($prep = mysqli_query($con, $query)) {
-			if (isset($row['uname'])) {
-				if ($static > $past) mysqli_query($con, "UPDATE Users SET online = 0 WHERE uname = '$member'");
+			if (isset($row['username'])) {
+				if ($static > $past) mysqli_query($con, "UPDATE $userb SET online = 0 WHERE username = '$member'");
 				
 				while ($row = mysqli_fetch_assoc($prep)) {
-					echo "<a href='?mode=profile&uid=".$row['uid']."'><img src='".$row['ava']."' width='20px' /> ".$row['uname']."</a>";
+					echo "<a href='?mode=profile&uid=".$row['id']."'><img src='".$row['avatar']."' width='20px' /> ".$row['username']."</a>";
 					echo " ";
 				}
 			}
@@ -95,6 +95,4 @@
 		</form>
 		<?php
 	}
-	
-	//$mysqli->close();
 ?>
