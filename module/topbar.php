@@ -25,7 +25,7 @@
 	$timeout = $time - $past;
 	
 	$joke = "SELECT joke FROM blg_jokes ORDER BY rand() LIMIT 1";
-	$uonline = "SELECT id, username, avatar, ontime, online FROM $userb WHERE username = '$member' AND ontime > $timeout";
+	$uonline = "SELECT id, username, avatar, ontime FROM $userb WHERE username = '$member' AND ontime > $timeout";
 	
 	// Random Jokes.
 	$joker = $mysqli->prepare($joke);
@@ -50,7 +50,7 @@
 	
 	if (!isset($uuname)) {
 		$uon->close();
-		$sqli = "UPDATE $userb SET ontime = $time, online = 1 WHERE username = '$member'";
+		$sqli = "UPDATE $userb SET ontime = $time WHERE username = '$member'";
 		$mysqli->query($sqli);
 	}
 	
@@ -58,7 +58,7 @@
 	
 	$con = mysqli_connect($hosty, $uname, $paswd, $dbnme);
 	
-	$query = "SELECT id, username, avatar, ontime, online FROM $userb WHERE ontime > $past";
+	$query = "SELECT id, username, avatar, ontime FROM $userb WHERE ontime > $past";
 	$prep = mysqli_query($con, $query);
 	$row = mysqli_fetch_assoc($prep);
 	
@@ -66,10 +66,10 @@
 		echo "<b>Users online: </b>";
 		if ($prep = mysqli_query($con, $query)) {
 			if (isset($row['username'])) {
-				if ($static > $past) mysqli_query($con, "UPDATE $userb SET online = 0 WHERE username = '$member'");
-				
 				while ($row = mysqli_fetch_assoc($prep)) {
-					echo "<a href='?mode=profile&uid=".$row['id']."'><img src='".$row['avatar']."' width='20px' /> ".$row['username']."</a>";
+					echo "<a href='?mode=profile&uid=".$row['id']."'>";
+					if (!empty($row['avatar'])) echo "<img src='".$row['avatar']."' width='20px' /> ";
+					echo $row['username']."</a>";
 					echo " ";
 				}
 			}

@@ -23,7 +23,9 @@ $ts1 = GetAll($message);
 
 $owner = htmlentities($_SESSION['username']['username'], ENT_QUOTES, 'UTF-8');
 while ($stmt->fetch()) {
-	echo "<tr><td><img src='$uava' alt='$uuname\'s Avatar' height=50 /> <strong style='font-size: 20px;'><a href='profile.php?uid=$uuid'>$uuname</a>";
+	echo "<tr><td>";
+	if (!empty($uava)) echo "<img src='$uava' alt='$uuname\'s Avatar' height=50 /> ";
+	echo "<strong style='font-size: 20px;'><a href='profile.php?uid=$uuid'>$uuname</a>";
 	if ($cdel == 0) {
 		if ($admin || $owner == $uuname) echo "<div id='AddButton' class='AddButton'><a href='?mode=commentedit&id=$cid'>Edit</a>";
 		if ($admin) echo " | <a href='?mode=commentdel&id=$cid'>Delete</a>";
