@@ -1,9 +1,9 @@
-YaBS 2.0.1
+YaBS 2.0.2
 =====
 
 The first pure Blogging System, ever seen, since ages.<br />
 YaBS is Designed, to be lightweight, secure, beautiful, and meant for what it's made for: Blogs.<br />
-YaBS 2.0.1 has Launched, with many improvements, and additional features, making YaBS even more interesting, for general Bloggers.<br /><br />
+YaBS 2.0.2 has Launched, with many improvements, and additional features, making YaBS even more interesting, for general Bloggers.<br /><br />
 Release Date: 11-03-2015<br />
 More information: http://www.yamisoft.wtf<br /><br />
 
