@@ -1,4 +1,5 @@
 <?php
+include("module/mobile.php");
 include("config.php");
 header("Content-Type: text/html; charset=utf-8");
 session_start();
@@ -23,13 +24,24 @@ while ($usage->fetch()) $blogpur = $bp;
 $usage->close();
 $mysqli->close();
 ?>
-
+<?php if ($isMobile) echo "<div style='text-align: left;'><a id='simple-menu' href='#sidr'>MENU</a></div>"; ?>
 <div id='Container'>
 	<?php $curPage = $_GET['mode']; ?>
 	<div id='Logo'> <?php include("module/head.php"); ?> </div>
 	<div id='Links'> <?php include("module/topbar.php"); ?> </div>
 	
+	<?php if (!$isMobile) { ?>
 	<div id='User'> <?php include("module/menu.php"); ?> </div>
+	<?php }?>
+	
+	<?php if ($isMobile) { ?>
+	<div id='sidr'> <?php include("module/menu.php"); ?> </div>
+	<script>
+		$(document).ready(function() {
+			$('#simple-menu').sidr();
+		});
+	</script>
+	<?php } ?>
 	
 	<div id='Main'>
 	<?php

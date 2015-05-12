@@ -1,4 +1,5 @@
 <?php
+	include("module/mobile.php");
 	header("Content-Type: text/html; charset=utf-8");
 	require("common.php");
 	$row = null;
@@ -82,10 +83,23 @@
         <?php include("module/meta.php"); ?>
 </head>
 <body>
+<?php if ($isMobile) echo "<div style='text-align: left;'><a id='simple-menu' href='#sidr'>MENU</a></div>"; ?>
 <div id='Container'>
 	<div id='Logo'> <?php include("module/head.php"); ?> </div>
 	<div id='Links'> <?php include("module/topbar.php"); ?> </div>
+
+	<?php if (!$isMobile) { ?>
 	<div id='User'> <?php include("module/menu.php"); ?> </div>
+	<?php } ?>
+	
+	<?php if ($isMobile) { ?>
+	<div id='sidr'> <?php include("module/menu.php"); ?> </div>
+	<script>
+		$(document).ready(function() {
+		$('#simple-menu').sidr();
+	});
+	</script>
+	<?php } ?>
 	
 	<div id='Main'>
 	<h1>Register</h1>

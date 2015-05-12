@@ -5,7 +5,7 @@ session_start();
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>YaBS 2.0 Installation</title>
+<title>YaBS 2.1 Installation</title>
 </head>
 <body>
 <?php

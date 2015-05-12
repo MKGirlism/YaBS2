@@ -16,6 +16,11 @@ a:link, a:visited, a:hover, a:active {
 	text-decoration: none;
 }
 
+textarea {
+	resize: none;
+	width: 99%;
+}
+
 /*Container*/
 #Container {
 	max-width:1377px;
@@ -36,7 +41,7 @@ a:link, a:visited, a:hover, a:active {
 }
 
 #Main {
-	width: 100%;
+		width: 100%;
         margin-right:140px;
         text-align: left;
 }

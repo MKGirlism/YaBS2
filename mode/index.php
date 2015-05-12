@@ -29,11 +29,11 @@ while ($stmt->fetch()) {
 	}
 }
 
-$row = mysqli_fetch_row(mysqli_query($mysqli,"SELECT COUNT(Name) FROM Blogs"));
+$row = mysqli_fetch_row(mysqli_query($mysqli,"SELECT COUNT(title) FROM blg_blogs"));
 $total_records = $row[0];
 $total_pages = ceil($total_records / 10);
 for ($i = 1; $i <= $total_pages; $i++)
-	echo "<a href='?page=".$i."'>".$i."</a>";
+	echo "<a href='?page=".$i."'>".$i."</a> ";
 
 $stmt->close();
 $mysqli->close();

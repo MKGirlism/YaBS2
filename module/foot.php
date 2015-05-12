@@ -10,7 +10,7 @@
 	$stmt->bind_result($gsname);
 	
 	while ($stmt->fetch()) {
-		echo "<br /><br />$gsname, Powered by <a href='http://www.yamisoft.wtf'>YaBS 2.0.2</a>.";
+		echo "<br /><br />$gsname, Powered by <a href='http://www.yamisoft.wtf'>YaBS 2.1</a>.";
 	}
 	
 	$stmt->close();
